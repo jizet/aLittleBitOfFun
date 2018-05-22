@@ -1,5 +1,18 @@
 'use strict'
-import { getRandomWordSync, getRandomWord } from 'word-maker'
+const { getRandomWordSync, getRandomWord } = require('word-maker')
 
-console.log('It works!')
+const handleAsync = () => {
+  setInterval(
+    async () => {
+      try {
+        let x = await getRandomWord({withErrors: true})
+        console.log(x)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }, 1000)
+}
+
+handleAsync()
+// console.log('It works!')
 // YOUR CODE HERE
