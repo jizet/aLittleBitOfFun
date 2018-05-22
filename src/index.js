@@ -9,12 +9,8 @@ const fizzBuzz = (i) => {
 
 const printWords = async () => {
   for (let i = 0; i < 100; i++) {
-    try {
-      let word = await getRandomWord({withErrors: true})
+      let word = await getRandomWord()
       console.log(`${i+1}: ${fizzBuzz(i+1) ? fizzBuzz(i+1) : word}`)
-    } catch (error) {
-      console.log(`${i+1}: D'oh!`)
-    }
   }
 }
 
