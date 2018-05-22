@@ -1,5 +1,6 @@
 'use strict'
 import { getRandomWordSync, getRandomWord } from 'word-maker'
+import * as fs from 'fs'
 
 const fizzBuzz = (i) => {
   return i%3 === 0 && i%5 === 0 ?
@@ -7,15 +8,20 @@ const fizzBuzz = (i) => {
         : i%5 === 0 ? 'Buzz' : null
 }
 
-const printWords = async () => {
+const writeFile = async () => {
+  if (fs.existsSync('./wordFile.txt')) {
+    fs.unlinkSync('./wordFile.txt')
+  }
+  let myFile = fs.createWriteStream('./wordFile.txt')
   for (let i = 0; i < 100; i++) {
     try {
       let word = await getRandomWord({withErrors: true})
-      console.log(`${i+1}: ${fizzBuzz(i+1) ? fizzBuzz(i+1) : word}`)
+      myFile.write(`${i+1}: ${fizzBuzz(i+1) ? fizzBuzz(i+1) : word}\n`)
     } catch (error) {
-      console.log(`${i+1}: D'oh!`)
+      myFile.write(`${i+1}: D'oh!\n`)
     }
   }
+  myFile.end()
 }
 
-printWords()
+writeFile()
