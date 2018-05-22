@@ -7,9 +7,9 @@ const fizzBuzz = (i) => {
         : i%5 === 0 ? 'Buzz' : null
 }
 
-const printWords = () => {
+const printWords = async () => {
   for (let i = 0; i < 100; i++) {
-    console.log(`${i+1}: ${fizzBuzz(i+1) ? fizzBuzz(i+1) : getRandomWordSync()}`)
+    console.log(`${i+1}: ${fizzBuzz(i+1) ? fizzBuzz(i+1) : await getRandomWord()}`)
   }
 }
 
